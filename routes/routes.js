@@ -1,4 +1,4 @@
-import { addNewEntry,getEntry } from '../controllers/baseController';
+import { addNewEntry, getEntry, findById } from '../controllers/baseController';
 const routes = function (app) {
     app.route('/contact')
         .get((req, res, next) => {
@@ -7,11 +7,12 @@ const routes = function (app) {
         }, getEntry)
         .post(addNewEntry);
 
-    app.route('/contact/:contactID')
-        .put((req, res,next) => {
+    app.route('/contact/:ID')
+    .get(findById)
+        .put((req, res, next) => {
             console.log(`request from ${req.originalUrl} and type is ${req.method}`);
             next();
-        },(req,res) =>{
+        }, (req, res) => {
             res.send(`PUT request done`)
         })
         .delete((req, res) => {

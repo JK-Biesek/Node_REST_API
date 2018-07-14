@@ -23,3 +23,13 @@ export const getEntry = (req,res)=>{
         }
     });
 };
+
+export const findById = (req,res)=>{
+    objContact.findById(req.params.ID, (err,data) =>{
+        if(err){
+            res.send(err);
+        } else {
+            res.json(data);
+        }
+    });
+};
