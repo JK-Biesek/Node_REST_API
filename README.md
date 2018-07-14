@@ -13,3 +13,4 @@ Use Postman
 ```firstName,lastName,email,phone```
 
 To retrive entries from postman use type ```GET``` and url ```http://localhost:3015/contact```
+To retrive specific entries from postman use its ID and request type ```GET``` and url ```http://localhost:3015/contact/<THE_ID>```
