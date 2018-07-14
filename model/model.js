@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 
-export const ContactSchema = new Schema({
+export const BasicSchema = new Schema({
     firstName: {
         type: String,
         required: 'Type you Name'

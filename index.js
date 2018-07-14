@@ -7,9 +7,7 @@ const port = 3015;
 
 //add mongoose connection
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/NodeAppDb', {
-    useMongoClient: true
-});
+mongoose.connect('mongodb://localhost/NodeAppDb');
 //add bodyParser
 app.use(bodyParser.urlencoded({ extended : true}));
 app.use(bodyParser.json());
