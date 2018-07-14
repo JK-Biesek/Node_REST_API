@@ -42,3 +42,12 @@ export const updateEntry = (req, res) => {
         }
     });
 };
+export const deleteEntry = (req, res) => {
+    objContact.findOneAndRemove({ _id: req.params.ID }, req.body, (err, data) => {
+        if (err) {
+            res.send(err);
+        } else {
+            res.json({message: 'Entry deleted sucessfully'});
+        }
+    });
+};

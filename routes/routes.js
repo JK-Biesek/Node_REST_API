@@ -1,4 +1,4 @@
-import { addNewEntry, getEntry, findById, updateEntry } from '../controllers/baseController';
+import { addNewEntry, getEntry, findById, updateEntry, deleteEntry } from '../controllers/baseController';
 const routes = function (app) {
     app.route('/contact')
         .get((req, res, next) => {
@@ -13,9 +13,10 @@ const routes = function (app) {
             console.log(`request from ${req.originalUrl} and type is ${req.method}`);
             next();
         }, updateEntry)
-        .delete((req, res) => {
-            res.send('Delete request done status ok')
-        });
+        .delete((req,res,next)=>{
+            console.log(`request from ${req.originalUrl} and type is ${req.method}`);
+            next();
+        },deleteEntry);
 
 }
 export default routes;
