@@ -14,3 +14,8 @@ Use Postman
 
 To retrive entries from postman use type ```GET``` and url ```http://localhost:3015/contact```
 To retrive specific entries from postman use its ID and request type ```GET``` and url ```http://localhost:3015/contact/<THE_ID>```
+
+To update record from database use type ```PUT``` and add new keys and values in body request
+then in url ```http://localhost:3015/contact/<THE_ID>```
+
+To Delete record from database use type ```DELETE``` and the url  ```http://localhost:3015/contact/<THE_ID>```
