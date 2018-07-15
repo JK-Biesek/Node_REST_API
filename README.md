@@ -19,3 +19,6 @@ To update record from database use type ```PUT``` and add new keys and values in
 then in url ```http://localhost:3015/contact/<THE_ID>```
 
 To Delete record from database use type ```DELETE``` and the url  ```http://localhost:3015/contact/<THE_ID>```
+
+
+To Run test cases type in command line ```mocha```

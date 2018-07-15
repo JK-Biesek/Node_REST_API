@@ -8,12 +8,25 @@ const server = require('../index.js');
 const expect = require('chai').expect;
 chai.use(chaiHttp);
 
+const data = {
+    firstName: 'Test',
+    lastName: 'Tester',
+    email: 'jakub@test.com',
+    phone: 123456789
+};
+const data1 = {
+    firstName: 'Test2',
+    lastName: 'Tester2',
+    email: 'test@test.com',
+    phone: 0987654312
+}
+
 describe('First test', () => {
     it('Should assert true to be true', () => {
-      expect(true).to.be.true;
+        expect(true).to.be.true;
     });
-  }); 
-  describe("REST API", () => {
+});
+describe("REST API", () => {
     it("Checks contact route", (done) => {
         chai.request(server).get("/contact").end((err, res) => {
             if (err) {
@@ -36,12 +49,6 @@ describe('First test', () => {
         });
     });
     it("should POST a contact entry", (done) => {
-        const data = {
-            firstName: 'Test',
-            lastName: 'Tester',
-            email: 'jakub@test.com',
-            phone: 123456789
-        }
         chai.request(server).post("/contact").send(data)
             .end((err, res) => {
                 if (err) {
@@ -55,18 +62,49 @@ describe('First test', () => {
                 }
             });
     });
-    it("should reject if no data",(done)=>{
-        const data = {
+    it("should reject if no data", (done) => {
+        let data = {
             firstName: '',
         }
         chai.request(server).post("/contact").send(data)
-        .end((err,res)=>{
-            res.should.have.status(200);
+            .end((err, res) => {
+                res.should.have.status(200);
                 res.body.should.be.a('object');
                 res.body.should.have.property('errors');
                 res.body.errors.should.have.property('firstName');
                 res.body.errors.firstName.message.should.be.eq('Type your Name');
                 done();
+            });
+    });
+    it("should Update a record with given id", (done) => {
+        chai.request(server).post("/contact").send(data)
+            .end((err, res) => {
+                res.body.should.have.property('_id');
+                if (res.body.should.have.property('_id')) {
+                    let id = res.body._id;
+                    chai.request(server).put("/contact/" + id).send(data1)
+                        .end((err, res) => {
+                            res.body.should.be.a('object');
+                            res.body.firstName.should.be.eq('Test2');
+                            done();
+                        });
+                }
+            });
+    });
+
+    it("Should delete a record by given id",(done)=>{
+        chai.request(server).post("/contact").send(data)
+        .end((err,res)=>{
+            if (res.body.should.have.property('_id')) {
+                let id = res.body._id;
+                chai.request(server).delete("/contact/" + id)
+                .end((err,res)=>{
+                    res.should.have.status(200);
+                    res.body.should.have.property('message').eq('Entry deleted sucessfully');
+                    done();
+                });
+            }
         });
     });
 });
+
