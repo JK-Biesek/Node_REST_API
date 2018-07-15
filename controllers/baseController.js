@@ -1,9 +1,7 @@
-import mongoose from 'mongoose';
-import { BasicSchema } from '../model/model';
+let objContact = require('../model/model');
 
-const objContact = mongoose.model('Contact', BasicSchema);
 
-export const addNewEntry = (req, res) => {
+const addNewEntry = (req, res) => {
     let newContact = new objContact(req.body);
     newContact.save((err, contact) => {
         if (err) {
@@ -14,7 +12,7 @@ export const addNewEntry = (req, res) => {
     });
 };
 
-export const getEntry = (req, res) => {
+const getEntry = (req, res) => {
     objContact.find({}, (err, data) => {
         if (err) {
             res.send(err);
@@ -24,7 +22,7 @@ export const getEntry = (req, res) => {
     });
 };
 
-export const findById = (req, res) => {
+const findById = (req, res) => {
     objContact.findById(req.params.ID, (err, data) => {
         if (err) {
             res.send(err);
@@ -33,7 +31,7 @@ export const findById = (req, res) => {
         }
     });
 };
-export const updateEntry = (req, res) => {
+const updateEntry = (req, res) => {
     objContact.findOneAndUpdate({ _id: req.params.ID }, req.body, { new: true }, (err, data) => {
         if (err) {
             res.send(err);
@@ -42,12 +40,14 @@ export const updateEntry = (req, res) => {
         }
     });
 };
-export const deleteEntry = (req, res) => {
+const deleteEntry = (req, res) => {
     objContact.findOneAndRemove({ _id: req.params.ID }, req.body, (err, data) => {
         if (err) {
             res.send(err);
         } else {
-            res.json({message: 'Entry deleted sucessfully'});
+            res.json({ message: 'Entry deleted sucessfully' });
         }
     });
 };
+
+module.exports = { addNewEntry, getEntry, findById, updateEntry, deleteEntry };

@@ -1,9 +1,9 @@
-import mongoose from 'mongoose';
+let mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
 
-export const BasicSchema = new Schema({
+ const BasicSchema = new Schema({
     firstName: {
         type: String,
         required: 'Type you Name'
@@ -23,3 +23,5 @@ export const BasicSchema = new Schema({
         default: Date.now
     }
 });
+
+module.exports = mongoose.model('Contact', BasicSchema);
