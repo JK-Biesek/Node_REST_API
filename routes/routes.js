@@ -1,22 +1,22 @@
-import { addNewEntry, getEntry, findById, updateEntry, deleteEntry } from '../controllers/baseController';
+let data = require('../controllers/baseController');
 const routes = function (app) {
     app.route('/contact')
         .get((req, res, next) => {
             console.log(`request from ${req.originalUrl} and type is ${req.method}`);
             next();
-        }, getEntry)
-        .post(addNewEntry);
+        }, data.getEntry)
+        .post(data.addNewEntry);
 
     app.route('/contact/:ID')
-    .get(findById)
+    .get(data.findById)
         .put((req, res, next) => {
             console.log(`request from ${req.originalUrl} and type is ${req.method}`);
             next();
-        }, updateEntry)
+        }, data.updateEntry)
         .delete((req,res,next)=>{
             console.log(`request from ${req.originalUrl} and type is ${req.method}`);
             next();
-        },deleteEntry);
+        },data.deleteEntry);
 
 }
-export default routes;
+module.exports = routes;
