@@ -101,6 +101,7 @@ describe("REST API", () => {
                 .end((err,res)=>{
                     res.should.have.status(200);
                     res.body.should.have.property('message').eq('Entry deleted sucessfully');
+                    res.body.should.not.have.property('firstName');
                     done();
                 });
             }
