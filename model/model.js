@@ -6,11 +6,11 @@ const Schema = mongoose.Schema;
  const BasicSchema = new Schema({
     firstName: {
         type: String,
-        required: 'Type you Name'
+        required: 'Type your Name'
     },
     lastName: {
         type: String,
-        required: 'Type you Last Name'
+        required: 'Type your Last Name'
     },
     email: {
         type: String,
