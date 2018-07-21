@@ -44,6 +44,10 @@ export const login = (req, res) => {
     });
 }
 
-export const loginReq = (req, res) => {
-
+export const loginReq = (req, res, next) => {
+    if(req.data) {
+        next();
+    } else{
+        return res.status(401).json({ message: 'Unauthorized Access !'});
+    }
 }
