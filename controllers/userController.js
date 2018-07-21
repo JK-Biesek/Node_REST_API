@@ -23,7 +23,25 @@ export const register = (req, res) => {
 }
 
 export const login = (req, res) => {
-
+    User.findOne({
+        email: req.body.email
+    }, (err, data) => {
+        if (err) {
+            res.send(err);
+        } else if (!data) {
+            res.status(401).json({
+                message: 'No user found'
+            });
+        } else if (data) {
+            if (!user.comparePassword(req.body.password, data.hashPassword)) {
+                res.status(401).json({
+                    message: 'Wrong Password ! '
+                });
+            } else {
+                return res.json({ token: jwt.sign({ email: data.email, userName: data.userName, _id: user.ID }, 'Secure REST api') })
+            }
+        }
+    });
 }
 
 export const loginReq = (req, res) => {
