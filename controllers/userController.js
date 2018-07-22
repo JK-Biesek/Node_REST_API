@@ -2,9 +2,7 @@ let mongoose = require('mongoose');
 let jwt = require('jsonwebtoken');
 let bcrypt = require('bcrypt');
 
-import { UserSchema } from '../model/user';
-
-const User = mongoose.model('User', UserSchema);
+let User = require('../model/user');
 
  const register = (req, res) => {
     const newUser = new User(req.body);
