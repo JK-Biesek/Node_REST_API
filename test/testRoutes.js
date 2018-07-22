@@ -20,7 +20,15 @@ const data1 = {
     email: 'test@test.com',
     phone: 0987654312
 }
-
+describe('Port 3015', () => {
+    it('Main page status', function(done) {
+        chai.request(server).get('/').end((error, res, body)=>{
+            res.should.have.status(200);
+            res.text.should.be.eql("Server is running at port 3015");
+            done();
+        }); 
+    });
+    });
 describe('First test', () => {
     it('Should assert true to be true', () => {
         expect(true).to.be.true;

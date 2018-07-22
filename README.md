@@ -7,6 +7,8 @@ To run app locally :
 2. ```npm run``` to run app locally at port ```:3015```
 3. to run mongoDb type ```mongod```
 
+To fully use Authentication features go to ```routes/routes.js``` and <b>uncomment</b>  /*users.loginReq,*/ in 5 places.
+
 Use Postman
 1.To add new User to database use ```POST``` type request and url ```http://localhost:3015/auth/register```
 
