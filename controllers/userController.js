@@ -6,7 +6,7 @@ import { UserSchema } from '../model/user';
 
 const User = mongoose.model('User', UserSchema);
 
-export const register = (req, res) => {
+ const register = (req, res) => {
     const newUser = new User(req.body);
     newUser.hashPassword = bcrypt.hashSync(req.body.password, 10);
 
@@ -16,13 +16,13 @@ export const register = (req, res) => {
                 message: err
             });
         } else {
-            suer.hashPassword = undefined;
+            data.hashPassword = undefined;
             return res.json(data);
         }
     });
 }
 
-export const login = (req, res) => {
+ const login = (req, res) => {
     User.findOne({
         email: req.body.email
     }, (err, data) => {
@@ -33,21 +33,22 @@ export const login = (req, res) => {
                 message: 'No user found'
             });
         } else if (data) {
-            if (!user.comparePassword(req.body.password, data.hashPassword)) {
+            if (!data.comparePassword(req.body.password, data.hashPassword)) {
                 res.status(401).json({
                     message: 'Wrong Password ! '
                 });
             } else {
-                return res.json({ token: jwt.sign({ email: data.email, userName: data.userName, _id: user.ID }, 'Secure REST api') })
+                return res.json({ token: jwt.sign({ email: data.email, userName: data.userName, _id: data.ID }, 'RESTFUL-api') })
             }
         }
     });
 }
 
-export const loginReq = (req, res, next) => {
-    if(req.data) {
+ const loginReq = (req, res, next) => {
+    if(req.User) {
         next();
     } else{
-        return res.status(401).json({ message: 'Unauthorized Access !'});
+        return res.status(401).json({ message: 'Unauthorized User !'});
     }
 }
+module.exports = {register, login, loginReq}
