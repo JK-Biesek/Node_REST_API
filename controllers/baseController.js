@@ -45,7 +45,9 @@ const deleteEntry = (req, res) => {
         if (err) {
             res.send(err);
         } else {
-            res.json({ message: 'Entry deleted sucessfully' });
+            res.json({ message: 'Entry deleted sucessfully',
+            Username: 'User Name Deleted : ' + req.body.firstName
+        });
         }
     });
 };
