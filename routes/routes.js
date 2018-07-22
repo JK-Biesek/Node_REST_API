@@ -5,19 +5,19 @@ const routes = function (app) {
         .get((req, res, next) => {
             console.log(`request from ${req.originalUrl} and type is ${req.method}`);
             next();
-        }, users.loginReq, data.getEntry)
-        .post(users.loginReq, data.addNewEntry);
+        }, /*users.loginReq,*/ data.getEntry)
+        .post(/*users.loginReq,*/ data.addNewEntry);
 
     app.route('/contact/:ID')
-        .get(users.loginReq, data.findById)
+        .get(/*users.loginReq,*/ data.findById)
         .put((req, res, next) => {
             console.log(`request from ${req.originalUrl} and type is ${req.method}`);
             next();
-        }, users.loginReq, data.updateEntry)
+        }, /*users.loginReq,*/ data.updateEntry)
         .delete((req, res, next) => {
             console.log(`request from ${req.originalUrl} and type is ${req.method}`);
             next();
-        }, users.loginReq, data.deleteEntry);
+        }, /*users.loginReq,*/ data.deleteEntry);
 
         app.route('/auth/register')
         .post(users.register);
